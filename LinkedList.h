@@ -21,14 +21,26 @@ Node *createNode(data value);
 
 LinkedList *createLinkedList();
 
+void *isEmpty(LinkedList *linkedList);
+
 void appendLinkedList(LinkedList *linkedList, data value);
 
 void deleteNode();
 
+// 翻转
 void reverseLinkedList(LinkedList *linkedList);
 
-// 相交链表
+// 相交链表(某一节点后链表完全一样)
 Node *getIntersectionNode(Node *headA, Node *headB);
+
+//排序2个链表
+Node *mergeTwoLists(Node *n1, Node *n2);
+
+// 奇偶元素聚合
+Node *oddEvenList(LinkedList *linkedList);
+
+// 回文列表
+int isPalindrome(LinkedList *linkedList);
 
 void printLinkedList(LinkedList *linkedList);
 
