@@ -153,9 +153,59 @@ Node *oddEvenList(LinkedList *linkedList) {
     return head;
 }
 
-int isPalindrome(LinkedList *linkedList) {
+Node *getMidNode(LinkedList *linkedList) {
+    assert(linkedList);
+    Node *slow = linkedList->head;
+    assert(slow);
+    Node *fast = slow;
+    Node *mid = NULL;
+    assert(fast);
+    for (;;) {
+        if (NULL == fast->next) { //odd
+            mid = slow;
+            break;
+        } else if (NULL == fast->next->next) { // even
+            printf("error:even list!!\n");
+            return FALSE;
+        }
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return mid;
+}
 
-    return FALSE;
+int isPalindrome(LinkedList *linkedList) {
+    assert(linkedList);
+    Node *mid = getMidNode(linkedList);
+    printf("The Middle Node ==> %d\n", mid->value);
+    // reverse
+    Node *pre = NULL;
+    Node *current = mid->next;
+    Node *temp = pre;
+    while (NULL != current) {
+        temp = current->next;
+        current->next = pre;
+        pre = current;
+        current = temp;
+    }
+
+    Node *head = NULL;
+    if (NULL != pre) {
+        head = pre;
+    }
+    printLinkedList(head);
+
+    Node *rightCur = head;
+    Node *leftCur = linkedList->head;
+    while (NULL != rightCur) {
+        if (leftCur->value != rightCur->value){
+            return FALSE;
+        }
+        leftCur = leftCur->next;
+        rightCur = rightCur->next;
+    }
+
+    return TRUE;
 }
 
 void printLinkedList(Node *head) {
@@ -169,13 +219,17 @@ void printLinkedList(Node *head) {
 }
 
 void test_list() {
+
     LinkedList *linkedList = createLinkedList();
-    appendLinkedList(linkedList, 11);
-    appendLinkedList(linkedList, 22);
-    appendLinkedList(linkedList, 33);
-    appendLinkedList(linkedList, 44);
-    appendLinkedList(linkedList, 55);
-    appendLinkedList(linkedList, 66);
+    appendLinkedList(linkedList, 1);
+    appendLinkedList(linkedList, 2);
+    appendLinkedList(linkedList, 3);
+    appendLinkedList(linkedList, 4);
+    appendLinkedList(linkedList, 5);
+    appendLinkedList(linkedList, 5);
+    appendLinkedList(linkedList, 3);
+    appendLinkedList(linkedList, 2);
+    appendLinkedList(linkedList, 1);
     printLinkedList(linkedList->head);
 
 //    deleteNodeByIndex(linkedList, 0);
@@ -187,14 +241,16 @@ void test_list() {
 //    oddEvenList(linkedList);
 //    printLinkedList(linkedList);
 
-    LinkedList *list2 = createLinkedList();
-    appendLinkedList(list2, 3);
-    appendLinkedList(list2, 4);
-    appendLinkedList(list2, 8);
-    appendLinkedList(list2, 9);
+//    LinkedList *list2 = createLinkedList();
+//    appendLinkedList(list2, 3);
+//    appendLinkedList(list2, 4);
+//    appendLinkedList(list2, 8);
+//    appendLinkedList(list2, 9);
+//
+//    Node *mNode = mergeTwoLists(linkedList->head, list2->head);
+//    printLinkedList(mNode);
 
-    Node *mNode = mergeTwoLists(linkedList->head, list2->head);
-    printLinkedList(mNode);
+    printf("The LinkedList Is Palindrome ? %s", isPalindrome(linkedList) == TRUE ? "TRUE" : "FALSE");
 
 
 }

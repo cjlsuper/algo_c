@@ -41,7 +41,10 @@ Node *mergeTwoLists(Node *n1, Node *n2);
 // 奇偶元素聚合
 Node *oddEvenList(LinkedList *linkedList);
 
-// 回文列表
+Node *getMidNode(LinkedList *linkedList);
+
+
+// 回文列表: 使用快慢指针，慢指针在进行操作的时候，顺带的进行链表的翻转，在进行半个链表之间的比较
 int isPalindrome(LinkedList *linkedList);
 
 void printLinkedList(Node *head);
