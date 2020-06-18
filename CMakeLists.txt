@@ -3,4 +3,4 @@ project(algo_c C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(algo_c main.c LinkedList.h)
+add_executable(algo_c main.c LinkedList.h linked_stack.h)

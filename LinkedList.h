@@ -21,9 +21,15 @@ typedef struct LinkedList {
 
 Node *createNode(data value);
 
+void *freeNode(Node *node);
+
 LinkedList *createLinkedList();
 
-void *isEmpty(LinkedList *linkedList);
+void destroyLinkedList(LinkedList *linkedList);
+
+void removeNthFromEnd(LinkedList *linkedList,data n);
+
+void *isLinkedListEmpty(LinkedList *linkedList);
 
 void appendLinkedList(LinkedList *linkedList, data value);
 
