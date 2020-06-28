@@ -106,13 +106,16 @@ void linkedListDeleteNthFromStart(LinkedList *linkedList, int index) {
 }
 
 void linkedListDeleteNthFromEnd(LinkedList *linkedList, int n) {
+    printf("************** linkedListDeleteNthFromEnd，end= %d *****************\n", n);
     if (NULL == linkedList) {
         return;
     }
+
     if (n < 1 || n > linkedList->length) {
         printf("Error: out of bounds!");
         return;
     }
+
     ListNode *nHead = createNode(-1);
     nHead->next = linkedList->head;
     linkedList->head = nHead;
@@ -121,25 +124,51 @@ void linkedListDeleteNthFromEnd(LinkedList *linkedList, int n) {
     for (int i = 0; i < n; i++) {
         fast = fast->next;
     }
+
     ListNode *slow = linkedList->head;
     int count = 0;
     while (fast->next) {
         slow = slow->next;
         fast = fast->next;
         count++;
+
+
+        printf("slow = %d\n", slow->data);
+        slow->next = slow->next->next;
+        linkedList->head = linkedList->head->next;
+        printLinkedList(linkedList);
+
     }
-    printf("slow = %d\n", slow->data);
-    slow->next = slow->next->next;
-    linkedList->head = linkedList->head->next;
+}
+
+void linkedListReverse(LinkedList *linkedList) {
+    printf("\n************** linkedListReverse *****************\n");
+    if (NULL == linkedList) {
+        return;
+    }
+
+    ListNode *current = linkedList->head;
+    ListNode *pre = NULL;
+    ListNode *temp = NULL;
+
+    while (current) {
+        temp = current->next;
+        current->next = pre;
+        pre = current;
+        current = temp;
+    }
+
+    linkedList->head = pre;
+
+
     printLinkedList(linkedList);
 
-}
-
-void linkedListReverse(LinkedList *linkedList){
 
 }
 
-void linkedListReverseFromNth(LinkedList *linkedList, int start);
+void linkedListReverseFromNth(LinkedList *linkedList, int start) {
+
+}
 
 
 void freeNode(ListNode *node) {
@@ -202,6 +231,10 @@ void testLinkedList() {
     }
     printLinkedList(linkedList);
 
+    linkedListReverse(linkedList);
+    linkedListReverse(linkedList);
+
+
 //    linkedListDelete(linkedList);
 //    linkedListDelete(linkedList);
 //    printLinkedList(linkedList);
@@ -221,6 +254,8 @@ void testLinkedList() {
 //    linkedListDeleteNthFromEnd(linkedList, 1);
 //    linkedListDeleteNthFromEnd(linkedList, 1);
 //    linkedListDeleteNthFromEnd(linkedList, 1);
+
+
 
 
 }
